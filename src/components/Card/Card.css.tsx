@@ -7,12 +7,12 @@ interface styleProps {
 
 export const Bg = styled.View<styleProps>`
   position: absolute;
-  top: 25%;
-  left: ${({ windowWidth }) => (windowWidth - windowWidth * 0.7) / 2};
+  top: 23%;
+  left: ${({ windowWidth }) => (windowWidth - windowWidth * 0.8) / 2};
   border-radius: 30;
   overflow: hidden;
-  height: ${({ windowHeight }) => windowHeight * 0.3};
-  width: ${({ windowWidth }) => windowWidth * 0.7};
+  height: ${({ windowHeight }) => windowHeight * 0.5};
+  width: ${({ windowWidth }) => windowWidth * 0.8};
   z-index: 2;
   background-color: rgba(255, 255, 255, 0.3);
 `;

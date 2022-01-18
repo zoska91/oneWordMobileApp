@@ -12,7 +12,7 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import ModalScreen from '../screens/ModalScreen';
+import ModalScreen from '../screens/ModalScreen/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/Home/HomeScreen';
 import UserScreen from '../screens/UserScreen';
@@ -41,7 +41,7 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name='Root' component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name='NotFound' component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+      <Stack.Group screenOptions={{ presentation: 'modal', headerShown: false }}>
         <Stack.Screen name='Modal' component={ModalScreen} />
       </Stack.Group>
     </Stack.Navigator>
@@ -70,21 +70,21 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
           headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name='code' color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name='info-circle'
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
+          // headerRight: () => (
+          // <Pressable
+          //   onPress={() => navigation.navigate('Modal')}
+          //   style={({ pressed }) => ({
+          //     opacity: pressed ? 0.5 : 1,
+          //   })}
+          // >
+          //   <FontAwesome
+          //     name='info-circle'
+          //     size={25}
+          //     color={Colors[colorScheme].text}
+          //     style={{ marginRight: 15 }}
+          //   />
+          // </Pressable>
+          // ),
         })}
       />
       <BottomTab.Screen
