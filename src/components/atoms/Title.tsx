@@ -1,16 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components/native';
-import { device } from '../../styles/devices';
-
-import {
-  useFonts,
-  JosefinSans_400Regular,
-  JosefinSans_700Bold,
-  JosefinSans_700Bold_Italic,
-} from '@expo-google-fonts/josefin-sans';
 
 interface TitleTextProps {
   small?: boolean;
+  light?: boolean;
 }
 
 interface TitleWrapperProps {
@@ -19,6 +12,7 @@ interface TitleWrapperProps {
 
 interface styledProps {
   small?: boolean;
+  light?: boolean;
 }
 
 export const Wrapper = styled.View<styledProps>`
@@ -30,7 +24,7 @@ export const Wrapper = styled.View<styledProps>`
 `;
 
 export const Text = styled.Text<styledProps>`
-  color: ${({ theme }) => theme.colorPrimary};
+  color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   text-align: center;
   font-size: ${({ small }) => (small ? 30 : 45)};
   padding: 0 3px;
@@ -38,10 +32,11 @@ export const Text = styled.Text<styledProps>`
   font-style: ${({ small }) => (small ? 'normal' : 'italic')};
 `;
 
-const TitleText: FC<TitleTextProps> = ({ small, children }) => {
+const TitleText: FC<TitleTextProps> = ({ small, children, light }) => {
   return (
     <Text
       small={small}
+      light={light}
       style={{ fontFamily: small ? 'JosefinSans_400Regular' : 'JosefinSans_700Bold_Italic' }}
     >
       {children}

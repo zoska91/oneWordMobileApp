@@ -1,10 +1,9 @@
 import { FC } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { Input } from '@ui-kitten/components';
 
 import * as S from './Inputs.css';
-import { Input, Layout } from '@ui-kitten/components';
-import { View } from 'react-native';
 
 interface InputFieldProps {
   name: string;
@@ -13,12 +12,8 @@ interface InputFieldProps {
   type?: string;
   noLabel?: boolean;
   defaultValue?: string;
+  light?: boolean;
 }
-
-const themeInput = {
-  bg: 'white',
-  focusBorderColor: '#2e2757',
-};
 
 const InputField: FC<InputFieldProps> = ({
   name,
@@ -27,6 +22,7 @@ const InputField: FC<InputFieldProps> = ({
   type = 'text',
   noLabel,
   defaultValue,
+  light,
   ...props
 }) => {
   const {
@@ -41,12 +37,11 @@ const InputField: FC<InputFieldProps> = ({
   return (
     <S.FieldContainer>
       {!noLabel && (
-        <S.FormLabel style={{ fontFamily: 'JosefinSans_700Bold' }}>
+        <S.FormLabel light={light} style={{ fontFamily: 'JosefinSans_700Bold' }}>
           {t(`form.${name}Label`)}
         </S.FormLabel>
       )}
-      {desc && <S.Desc>beriu</S.Desc>}
-      {desc && <S.Desc>{t(`form.${name}Desc`)}</S.Desc>}
+      {desc && <S.Desc light={light}>{t(`form.${name}Desc`)}</S.Desc>}
       <Controller
         control={control}
         name={name}

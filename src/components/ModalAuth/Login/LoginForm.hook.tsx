@@ -22,29 +22,28 @@ const useLogin = () => {
   };
 
   const onSubmit: SubmitHandler<IAuth> = async ({ email, password }) => {
-    // try {
-    //   const resp: any = await loginByEmail(email, password);
+    try {
+      const resp: any = await loginByEmail(email, password);
 
-    //   if (resp.code === 'auth/user-not-found') {
-    //     showToastMsg(t('auth.userNotFound'), 'error');
-    //     return;
-    //   }
+      if (resp.code === 'auth/user-not-found') {
+        showToastMsg(t('auth.userNotFound'), 'error');
+        return;
+      }
 
-    //   if (resp.code === 'auth/wrong-password') {
-    //     showToastMsg(t('auth.wrongPassword'), 'error');
-    //     return;
-    //   }
+      if (resp.code === 'auth/wrong-password') {
+        showToastMsg(t('auth.wrongPassword'), 'error');
+        return;
+      }
 
-    //   if (resp.code) {
-    //     showToastMsg(t('auth.error'), 'error');
-    //     return;
-    //   }
+      if (resp.code) {
+        showToastMsg(t('auth.error'), 'error');
+        return;
+      }
 
-    //   setRedirect(true);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-    console.log(email, password);
+      setRedirect(true);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const googleSubmit = async () => {

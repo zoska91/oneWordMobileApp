@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 
 interface LabelType {
   big?: boolean;
+  light?: boolean;
 }
 
 export const FieldContainer = styled.View`
@@ -14,15 +15,15 @@ export const ErrorText = styled.Text`
   color: #a50000;
 `;
 
-export const Desc = styled.Text`
+export const Desc = styled.Text<LabelType>`
   font-size: 12px;
-  color: ${({ theme }) => theme.colorPrimary};
+  color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   opacity: 0.7;
   margin-bottom: 7px;
 `;
 
 export const FormLabel = styled.Text<LabelType>`
-  color: ${({ theme }) => theme.colorPrimary};
+  color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   text-transform: uppercase;
 
   font-size: ${({ big }) => (big ? 20 : 16)};

@@ -5,41 +5,35 @@ import InputField from '../../atoms/Inputs/InputField';
 import GoogleButton from '../../atoms/Inputs/GoogleButton';
 import useAuth from './LoginForm.hook';
 import Button from '../../atoms/Button';
-import { TitleText, TitleWrapper } from '../../atoms/Title';
-import { TouchableOpacity, View } from 'react-native';
+import { TitleText } from '../../atoms/Title';
+
+import * as S from './LoginForm.style';
 
 interface LoginFormProps {
-  setIsSignUp: Dispatch<SetStateAction<boolean>>;
+  toggleDown: any;
 }
 
-const LoginForm: FC<LoginFormProps> = ({ setIsSignUp }) => {
+const LoginForm: FC<LoginFormProps> = ({ toggleDown }) => {
   const { methods, handleSubmit, onSubmit, googleSubmit, onError } = useAuth();
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: '100%',
-      }}
-    >
+    <S.Wrapper>
       <FormProvider {...methods}>
-        <TouchableOpacity style={{ marginBottom: 50 }} onPress={() => setIsSignUp(false)}>
+        <S.TouchableOpacity onPress={toggleDown}>
           <TitleText>Login</TitleText>
-        </TouchableOpacity>
-        <GoogleButton onPress={googleSubmit} />
+        </S.TouchableOpacity>
 
-        <View style={{ marginTop: 40, marginBottom: 50, width: '100%' }}>
+        <GoogleButton onPress={googleSubmit} />
+        <S.InputsContainer>
           <InputField name='email' required />
           <InputField name='password' required />
-        </View>
+        </S.InputsContainer>
 
-        <Button secondaryColor onPress={methods.handleSubmit(onSubmit, onError)}>
+        <Button secondaryColor onPress={handleSubmit(onSubmit, onError)}>
           Log in
         </Button>
       </FormProvider>
-    </View>
+    </S.Wrapper>
   );
 };
 

@@ -108,4 +108,7 @@ export const en = {
     done: 'Learned',
   },
   wordCreated: 'A new word has been added ',
+  auth: {
+    error: 'Something went wrong! Try again!',
+  },
 };

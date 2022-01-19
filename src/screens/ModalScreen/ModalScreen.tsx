@@ -4,7 +4,7 @@ import {} from '@react-navigation/native';
 
 import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from '../../components/Themed';
-import ModalAuth from '../../components/ModalAuth/ModalAuth';
+import ModalAuth from '../../components/ModalAuth/ModalAuth/ModalAuth';
 
 export default function ModalScreen({ route }) {
   const { type } = route.params.params;

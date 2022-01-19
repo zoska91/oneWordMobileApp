@@ -14,8 +14,8 @@ const Wrapper = styled.TouchableOpacity`
   align-items: center;
   border-radius: 10px;
   padding: 10px 20px;
-  margin: 20px 50px 0;
-  width: 95%;
+  margin: 20px 20px 0;
+  max-width: 90%;
 
   border: 2px solid ${({ theme }) => theme.colorPrimary};
 
