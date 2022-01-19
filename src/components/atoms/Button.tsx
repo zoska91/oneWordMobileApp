@@ -39,7 +39,7 @@ const Wrapper = styled.TouchableOpacity<styleWrapperProps>`
 
 const Text = styled.Text<styleWrapperProps>`
   color: ${({ theme, dark, secondaryColor }) =>
-    dark || secondaryColor ? 'white' : theme.colorPrimary};
+    dark || secondaryColor ? '#ffffff' : theme.colorPrimary};
   font-size: 16px;
   text-align: center;
 `;
@@ -59,7 +59,11 @@ const Button: FC<ButtonProps> = ({ children, onPress, dark, disabled, small, sec
         shadowRadius: 7,
       }}
     >
-      <Text dark={dark ? true : false} style={{ fontFamily: 'JosefinSans_400Regular' }}>
+      <Text
+        secondaryColor={secondaryColor}
+        dark={dark ? true : false}
+        style={{ fontFamily: 'JosefinSans_400Regular' }}
+      >
         {children}
       </Text>
     </Wrapper>

@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { View } from 'react-native';
 import { device } from '../../styles/devices';
 
 export const WelcomeCard = styled.View`

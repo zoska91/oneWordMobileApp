@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-// import { Desc, FormLabel } from 'components/ModalForm/Form.css';
-
+import * as S from './Inputs.css';
 import { Input, Layout } from '@ui-kitten/components';
+import { View } from 'react-native';
 
 interface InputFieldProps {
   name: string;
@@ -27,9 +27,11 @@ const InputField: FC<InputFieldProps> = ({
   type = 'text',
   noLabel,
   defaultValue,
+  ...props
 }) => {
   const {
     getValues,
+    control,
     register,
     formState: { errors },
   } = useFormContext();
@@ -37,33 +39,36 @@ const InputField: FC<InputFieldProps> = ({
   const { t } = useTranslation();
 
   return (
-    <Input
-      status={errors[name] ? 'danger' : ''}
-      placeholder={t(`form.${name}Placeholder`)}
-      defaultValue={defaultValue}
-      {...themeInput}
-      {...register(name, {
-        // @ts-ignore
-        required: required ? t('form.require') : null,
-      })}
-    />
-    // // <FormControl isInvalid={Boolean(errors[name])}>
-    //   {/* {!noLabel && <FormLabel>{t(`form.${name}Label`)}</FormLabel>} */}
-    //   {/* {desc && <Desc>{t(`form.${name}Desc`)}</Desc>} */}
+    <S.FieldContainer>
+      {!noLabel && (
+        <S.FormLabel style={{ fontFamily: 'JosefinSans_700Bold' }}>
+          {t(`form.${name}Label`)}
+        </S.FormLabel>
+      )}
+      {desc && <S.Desc>beriu</S.Desc>}
+      {desc && <S.Desc>{t(`form.${name}Desc`)}</S.Desc>}
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value, onBlur } }) => (
+          <Input
+            status={errors[name] ? 'danger' : ''}
+            placeholder={t(`form.${name}Placeholder`)}
+            value={value}
+            onBlur={onBlur}
+            onChangeText={value => onChange(value)}
+          />
+        )}
+        rules={{
+          required: {
+            value: true,
+            message: t('form.require'),
+          },
+        }}
+      />
 
-    //   {/* <Input
-
-    //     defaultValue={defaultValue}
-    //     placeholder={t(`form.${name}Placeholder`)}
-    //     {...themeInput}
-    //     {...register(name, {
-    //       // @ts-ignore
-    //       required: required ? t('form.require') : null,
-    //     })}
-    //     type={type}
-    //   /> */}
-    //   // <FormErrorMessage>{errors?.[name] && errors[name].message}</FormErrorMessage>
-    // // </FormControl>
+      {errors?.[name] && <S.ErrorText>{errors?.[name]?.message}</S.ErrorText>}
+    </S.FieldContainer>
   );
 };
 
