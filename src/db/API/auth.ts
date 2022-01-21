@@ -26,7 +26,7 @@ export const singInByGoogle = async () => {
 
 export const loginByEmail = async (email: string, password: string) => {
   const auth = getAuth();
-
+  console.log(email, password);
   try {
     const resp = await signInWithEmailAndPassword(auth, email, password);
     const user = resp.user;

@@ -1,9 +1,9 @@
-import { Dispatch, FC } from 'react';
+import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 
 import InputField from '../../atoms/Inputs/InputField';
 import GoogleButton from '../../atoms/Inputs/GoogleButton';
-import useAuth from './LoginForm.hook';
+import useLogin from './LoginForm.hook';
 import Button from '../../atoms/Button';
 import { TitleText } from '../../atoms/Title';
 
@@ -14,7 +14,7 @@ interface LoginFormProps {
 }
 
 const LoginForm: FC<LoginFormProps> = ({ toggleDown }) => {
-  const { methods, handleSubmit, onSubmit, googleSubmit, onError } = useAuth();
+  const { methods, handleSubmit, onSubmit, googleSubmit, onError } = useLogin();
 
   return (
     <S.Wrapper>
@@ -26,7 +26,7 @@ const LoginForm: FC<LoginFormProps> = ({ toggleDown }) => {
         <GoogleButton onPress={googleSubmit} />
         <S.InputsContainer>
           <InputField name='email' required />
-          <InputField name='password' required />
+          <InputField name='password' required secureTextEntry />
         </S.InputsContainer>
 
         <Button secondaryColor onPress={handleSubmit(onSubmit, onError)}>

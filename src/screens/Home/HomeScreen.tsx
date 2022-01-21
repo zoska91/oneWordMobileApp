@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
 import * as Notification from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
 
-import { View } from '../../components/Themed';
 import { RootTabScreenProps } from '../../../types';
 import { TitleWrapper, TitleText } from '../../components/atoms/Title';
 import Card from '../../components/Card/Card';
@@ -13,6 +11,7 @@ import TextWrapper from '../../components/atoms/Text';
 import Button from '../../components/atoms/Button';
 
 import * as S from './HomePage.css';
+import { getCurrentUser } from '../../db/API/auth';
 
 // co się stanie z notufikacjami kiedy aplikacja jest otwarta
 Notification.setNotificationHandler({
@@ -27,6 +26,11 @@ Notification.setNotificationHandler({
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) navigation.navigate('User');
+  }, []);
 
   useEffect(() => {
     Permissions.askAsync(Permissions.NOTIFICATIONS)
@@ -98,7 +102,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   };
 
   return (
-    <View style={styles.container}>
+    <S.Wrapper>
       <Layout>
         <TitleWrapper>
           <TitleText small>only</TitleText>
@@ -126,29 +130,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
             </Button>
           </S.WelcomeCard>
         </Card>
-
         {/* <Button title='noti' onPress={triggerNotification} /> */}
       </Layout>
-    </View>
+    </S.Wrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

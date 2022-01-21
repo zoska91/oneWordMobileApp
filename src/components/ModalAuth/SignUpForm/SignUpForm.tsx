@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useRef } from 'react';
+import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Dimensions, Animated } from 'react-native';
 
@@ -18,7 +18,7 @@ interface SignFormProps {
 const SignUpForm: FC<SignFormProps> = ({ toogleUp, toggleSlide }) => {
   const windowHeight = Dimensions.get('window').height;
 
-  const { methods, handleSubmit, onSubmit, googleSubmit } = useSignUpForm();
+  const { methods, handleSubmit, onSubmit, googleSubmit, onError } = useSignUpForm();
 
   return (
     <Animated.View
@@ -42,10 +42,12 @@ const SignUpForm: FC<SignFormProps> = ({ toogleUp, toggleSlide }) => {
         <GoogleButton onPress={googleSubmit} />
         <S.InputsContainer>
           <InputField name='email' required light />
-          <InputField name='password' required type='password' light />
+          <InputField name='password' required light secureTextEntry />
         </S.InputsContainer>
 
-        <Button secondaryColor>Sign in</Button>
+        <Button secondaryColor onPress={handleSubmit(onSubmit, onError)}>
+          Sign in
+        </Button>
       </FormProvider>
     </Animated.View>
   );

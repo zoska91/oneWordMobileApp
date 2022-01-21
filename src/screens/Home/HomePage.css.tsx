@@ -1,6 +1,15 @@
 import styled from 'styled-components/native';
 import { device } from '../../styles/devices';
 
+export const Wrapper = styled.View`
+  position: relative;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const WelcomeCard = styled.View`
   height: 100%;
   padding: 10px;

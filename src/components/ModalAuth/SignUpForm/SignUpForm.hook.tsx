@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import { IAuth } from '../../../types/formTypes';
@@ -16,11 +16,18 @@ const useSignUpForm = () => {
   const methods = useForm<IAuth>();
   const { handleSubmit } = methods;
 
+  const onError: SubmitErrorHandler<IAuth> = (errors, e) => {
+    console.log('==============error');
+    return console.log(errors);
+  };
+
   const onSubmit: SubmitHandler<IAuth> = ({ email, password }) => {
     const auth = getAuth();
+    console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
+        console.log(user);
         if (user.uid) {
           loginByEmail(email, password);
           addDefaultSettingsIfNotExistsAPI(user.uid);
@@ -43,7 +50,7 @@ const useSignUpForm = () => {
     }
   };
 
-  return { redirect, methods, handleSubmit, onSubmit, googleSubmit };
+  return { redirect, methods, handleSubmit, onSubmit, googleSubmit, onError };
 };
 
 export default useSignUpForm;

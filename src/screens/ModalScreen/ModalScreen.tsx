@@ -1,16 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
-import {} from '@react-navigation/native';
+import { StyleSheet, View } from 'react-native';
+import { RouteProp } from '@react-navigation/native';
 
-import EditScreenInfo from '../../components/EditScreenInfo';
-import { Text, View } from '../../components/Themed';
-import ModalAuth from '../../components/ModalAuth/ModalAuth/ModalAuth';
+import ModalAuth from '../../components/ModalAuth/ModalAuth';
+import { RootStackParamList } from '../../../types';
+import { FC } from 'react';
 
-export default function ModalScreen({ route }) {
-  const { type } = route.params.params;
+interface IModalScreenProps {
+  route: RouteProp<RootStackParamList, 'Modal'>;
+}
+
+const ModalScreen: FC<IModalScreenProps> = ({ route }) => {
+  const type = route?.params?.params?.type;
 
   return <View style={styles.container}>{type === 'auth' && <ModalAuth />}</View>;
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -18,13 +21,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
 });
+
+export default ModalScreen;

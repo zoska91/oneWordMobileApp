@@ -1,8 +1,8 @@
 import { FC, useRef } from 'react';
 import { Animated, Dimensions } from 'react-native';
 import styled from 'styled-components/native';
-import LoginForm from '../Login/LoginForm';
-import SignUpForm from '../SignUpForm/SignUpForm';
+import LoginForm from './Login/LoginForm';
+import SignUpForm from './SignUpForm/SignUpForm';
 
 const Wrapper = styled.View`
   padding-top: 20px;
@@ -14,7 +14,7 @@ interface ModalAuthAuthProps {}
 const ModalAuth: FC<ModalAuthAuthProps> = () => {
   const windowHeight = Dimensions.get('window').height;
 
-  const toggleSlide = useRef(new Animated.Value(windowHeight * 0.6)).current;
+  const toggleSlide = useRef(new Animated.Value(windowHeight * 0.58)).current;
 
   const toogleUp = () => {
     Animated.timing(toggleSlide, {

@@ -13,6 +13,7 @@ interface InputFieldProps {
   noLabel?: boolean;
   defaultValue?: string;
   light?: boolean;
+  secureTextEntry?: boolean;
 }
 
 const InputField: FC<InputFieldProps> = ({
@@ -23,12 +24,12 @@ const InputField: FC<InputFieldProps> = ({
   noLabel,
   defaultValue,
   light,
+  secureTextEntry,
   ...props
 }) => {
   const {
     getValues,
     control,
-    register,
     formState: { errors },
   } = useFormContext();
 
@@ -47,6 +48,7 @@ const InputField: FC<InputFieldProps> = ({
         name={name}
         render={({ field: { onChange, value, onBlur } }) => (
           <Input
+            secureTextEntry={secureTextEntry}
             status={errors[name] ? 'danger' : ''}
             placeholder={t(`form.${name}Placeholder`)}
             value={value}

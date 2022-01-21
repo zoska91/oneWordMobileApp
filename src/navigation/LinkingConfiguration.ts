@@ -13,21 +13,9 @@ const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.makeUrl('/')],
   config: {
     screens: {
-      Root: {
-        screens: {
-          Home: {
-            screens: {
-              Home: 'home',
-            },
-          },
-          User: {
-            screens: {
-              User: 'user',
-            },
-          },
-        },
-      },
-      Modal: 'modal',
+      Home: 'Home',
+      User: 'User',
+      Modal: 'Modal',
       NotFound: '*',
     },
   },

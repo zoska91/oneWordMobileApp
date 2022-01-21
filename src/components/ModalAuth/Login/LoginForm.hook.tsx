@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 
@@ -6,11 +5,11 @@ import { loginByEmail, singInByGoogle } from '../../../db/API/auth';
 import { addDefaultSettingsIfNotExistsAPI } from '../../../db/API/settings';
 import { IAuth } from '../../../types/formTypes';
 import { showToastMsg } from '../../../common/showToastMsg';
+import { useNavigation } from '@react-navigation/native';
 
 const useLogin = () => {
   const { t } = useTranslation();
-
-  const [redirect, setRedirect] = useState<boolean>(false);
+  const navigation = useNavigation();
 
   const methods = useForm<IAuth>();
 
@@ -39,8 +38,8 @@ const useLogin = () => {
         showToastMsg(t('auth.error'), 'error');
         return;
       }
-
-      setRedirect(true);
+      // @ts-ignore
+      navigation.navigate('User');
     } catch (e) {
       console.error(e);
     }
@@ -48,13 +47,14 @@ const useLogin = () => {
 
   const googleSubmit = async () => {
     const result = await singInByGoogle();
+
     if (result.token && result.user) {
-      setRedirect(true);
+      navigation.navigate('User');
       addDefaultSettingsIfNotExistsAPI(result.user.uid);
     }
   };
 
-  return { redirect, methods, handleSubmit, onSubmit, googleSubmit, onError };
+  return { methods, handleSubmit, onSubmit, googleSubmit, onError };
 };
 
 export default useLogin;
