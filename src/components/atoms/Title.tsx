@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import styled from 'styled-components/native';
-import { device } from '../../styles/devices';
 
 interface TitleTextProps {
   small?: boolean;
+  light?: boolean;
 }
 
 interface TitleWrapperProps {
@@ -12,6 +12,7 @@ interface TitleWrapperProps {
 
 interface styledProps {
   small?: boolean;
+  light?: boolean;
 }
 
 export const Wrapper = styled.View<styledProps>`
@@ -23,18 +24,24 @@ export const Wrapper = styled.View<styledProps>`
 `;
 
 export const Text = styled.Text<styledProps>`
-  color: ${({ theme }) => theme.colorPrimary};
-  /* font-family: 'Josefin Sans', sans-serif; */
-  font-weight: bold;
+  color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   text-align: center;
-  font-size: ${({ small }) => (small ? 30 : 50)};
+  font-size: ${({ small }) => (small ? '30px' : '45px')};
   padding: 0 3px;
   text-transform: ${({ small }) => (small ? 'lowercase' : 'uppercase')};
   font-style: ${({ small }) => (small ? 'normal' : 'italic')};
 `;
 
-const TitleText: FC<TitleTextProps> = ({ small, children }) => {
-  return <Text small={small}>{children}</Text>;
+const TitleText: FC<TitleTextProps> = ({ small, children, light }) => {
+  return (
+    <Text
+      small={small}
+      light={light}
+      style={{ fontFamily: small ? 'JosefinSans_400Regular' : 'JosefinSans_700Bold_Italic' }}
+    >
+      {children}
+    </Text>
+  );
 };
 
 const TitleWrapper: FC<TitleWrapperProps> = ({ small, children }) => {

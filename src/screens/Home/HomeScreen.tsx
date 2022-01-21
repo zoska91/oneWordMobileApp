@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
-
-import { Button, StyleSheet } from 'react-native';
-import Svg, { Circle, RadialGradient, Defs, Stop, Ellipse, Rect } from 'react-native-svg';
-
-import { Text, View } from '../../components/Themed';
-import { RootTabScreenProps } from '../../../types';
+import { useTranslation } from 'react-i18next';
 import * as Notification from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
-import { useTranslation } from 'react-i18next';
 
-import * as S from './HomePage.css';
+import { RootTabScreenProps } from '../../../types';
 import { TitleWrapper, TitleText } from '../../components/atoms/Title';
 import Card from '../../components/Card/Card';
 import Layout from '../../Layout/Layout';
+import TextWrapper from '../../components/atoms/Text';
+import Button from '../../components/atoms/Button';
+
+import * as S from './HomePage.css';
+import { getCurrentUser } from '../../db/API/auth';
 
 // co się stanie z notufikacjami kiedy aplikacja jest otwarta
 Notification.setNotificationHandler({
@@ -27,6 +26,11 @@ Notification.setNotificationHandler({
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) navigation.navigate('User');
+  }, []);
 
   useEffect(() => {
     Permissions.askAsync(Permissions.NOTIFICATIONS)
@@ -57,7 +61,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       response => {
         console.log(response);
         if (response && response.notification.request.content.data.id === 'test') {
-          navigation.navigate('Modal');
+          // navigation.navigate('Modal');
         }
       }
     );
@@ -98,7 +102,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   };
 
   return (
-    <View style={styles.container}>
+    <S.Wrapper>
       <Layout>
         <TitleWrapper>
           <TitleText small>only</TitleText>
@@ -107,35 +111,27 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
         </TitleWrapper>
         <Card>
           <S.WelcomeCard>
-            <Text>{t('welcome2')}</Text>
-            {/* <Text>{t('welcome3')}</Text> */}
-            {/* <Text>{t('welcome4')}</Text> */}
-            {/* <Button dark>{t('welcome5')}</Button> */}
+            <TextWrapper>{t('welcome')}</TextWrapper>
+            <TextWrapper>{t('welcome2')}</TextWrapper>
+            <TextWrapper>{t('welcome3')}</TextWrapper>
+            <TextWrapper>{t('welcome4')}</TextWrapper>
+            <Button
+              dark
+              onPress={() =>
+                navigation.navigate('Modal', {
+                  screen: 'Modal',
+                  params: {
+                    type: 'auth',
+                  },
+                })
+              }
+            >
+              {t('welcome5')}
+            </Button>
           </S.WelcomeCard>
         </Card>
-
         {/* <Button title='noti' onPress={triggerNotification} /> */}
       </Layout>
-    </View>
+    </S.Wrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});

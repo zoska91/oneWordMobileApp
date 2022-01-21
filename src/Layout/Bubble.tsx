@@ -16,8 +16,8 @@ interface IBubbleProps {
   fy: string;
   rx: string;
   ry: string;
-  opacity: number;
-  zIndex: number;
+  opacity?: number;
+  zIndex?: number;
   flyParams: { x: number; y: number; time: number };
 }
 const Bubble = ({
