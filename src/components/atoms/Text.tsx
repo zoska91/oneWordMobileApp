@@ -9,7 +9,7 @@ const Wrapper = styled.Text<TextProps>`
   color: ${({ theme }) => theme.colorPrimary};
   /* font-family: 'Josefin Sans', sans-serif; */
   text-align: center;
-  font-size: ${({ small }) => (small ? 10 : 20)};
+  font-size: ${({ small }) => (small ? '10px' : '20px')};
   padding: 0 3px;
 `;
 

@@ -26,7 +26,7 @@ export const FormLabel = styled.Text<LabelType>`
   color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   text-transform: uppercase;
 
-  font-size: ${({ big }) => (big ? 20 : 16)};
+  font-size: ${({ big }) => (big ? '20px' : '16px')};
 
   margin-top: 15px;
   display: flex;

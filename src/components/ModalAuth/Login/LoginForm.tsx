@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 
 import InputField from '../../atoms/Inputs/InputField';

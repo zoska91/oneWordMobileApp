@@ -1,19 +1,18 @@
 import { useEffect } from 'react';
-
-import { StyleSheet, TouchableOpacity } from 'react-native';
-
-import { Text, View } from '../../components/Themed';
-import { RootTabScreenProps } from '../../../types';
+import { useTranslation } from 'react-i18next';
+import { StyleSheet } from 'react-native';
 import * as Notification from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
-import { useTranslation } from 'react-i18next';
 
-import * as S from './HomePage.css';
+import { View } from '../../components/Themed';
+import { RootTabScreenProps } from '../../../types';
 import { TitleWrapper, TitleText } from '../../components/atoms/Title';
 import Card from '../../components/Card/Card';
 import Layout from '../../Layout/Layout';
 import TextWrapper from '../../components/atoms/Text';
 import Button from '../../components/atoms/Button';
+
+import * as S from './HomePage.css';
 
 // co się stanie z notufikacjami kiedy aplikacja jest otwarta
 Notification.setNotificationHandler({

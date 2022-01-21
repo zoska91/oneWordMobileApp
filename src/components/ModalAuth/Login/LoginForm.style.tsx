@@ -9,11 +9,11 @@ export const Wrapper = styled.View`
 `;
 
 export const InputsContainer = styled.View`
-  margin-top: 40;
-  margin-bottom: 50;
+  margin-top: 40px;
+  margin-bottom: 50px;
   width: 100%;
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
-  margin-bottom: 50;
+  margin-bottom: 50px;
 `;

@@ -26,7 +26,7 @@ export const Wrapper = styled.View<styledProps>`
 export const Text = styled.Text<styledProps>`
   color: ${({ theme, light }) => (light ? '#fff' : theme.colorPrimary)};
   text-align: center;
-  font-size: ${({ small }) => (small ? 30 : 45)};
+  font-size: ${({ small }) => (small ? '30px' : '45px')};
   padding: 0 3px;
   text-transform: ${({ small }) => (small ? 'lowercase' : 'uppercase')};
   font-style: ${({ small }) => (small ? 'normal' : 'italic')};

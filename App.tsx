@@ -14,7 +14,6 @@ import { ApplicationProvider } from '@ui-kitten/components';
 export default function App() {
   const { isLoadingComplete, fontsLoaded } = useCachedResources();
   const colorScheme = useColorScheme();
-  console.log(colorScheme);
 
   if (!isLoadingComplete || !fontsLoaded) {
     return null;

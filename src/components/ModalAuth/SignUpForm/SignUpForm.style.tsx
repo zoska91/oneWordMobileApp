@@ -6,8 +6,8 @@ export const Wrapper = StyleSheet.create({
     position: 'absolute',
     backgroundColor: '#2e2757',
     width: '100%',
-    paddingTop: '30px',
-    paddingBottom: '30px',
+    paddingTop: 10,
+    paddingBottom: 30,
     top: 180,
   },
 });
@@ -24,7 +24,7 @@ export const Title = styled.Text`
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
-  margin-bottom: 50;
+  margin-bottom: 50px;
 `;
 
 export const TopRounding = styled.View`
@@ -32,13 +32,13 @@ export const TopRounding = styled.View`
   top: 0;
   left: 50%;
   width: 30%;
-  height: 100;
-  border-radius: 100;
+  height: 100px;
+  border-radius: 100px;
   background-color: #2e2757;
 `;
 
 export const InputsContainer = styled.View`
-  margin-top: 40;
-  margin-bottom: 50;
-  width: '100%';
+  margin-top: 40px;
+  margin-bottom: 50px;
+  width: 100%;
 `;
