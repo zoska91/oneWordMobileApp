@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { device } from '../../styles/devices';
 import { flexCenter } from '../../styles/mixins';
 
 export const Wrapper = styled.View`
@@ -13,7 +14,7 @@ export const Wrapper = styled.View`
 export const WordCard = styled.View`
   height: 100%;
   width: 100%;
-  padding: 0 30px;
+  padding: 20px;
 `;
 
 export const BasicWord = styled.Text`
@@ -31,13 +32,9 @@ export const BasicWord = styled.Text`
 
 export const TransWord = styled.View`
   width: 100%;
-  min-height: 50%;
   margin: 0 auto;
   flex: 1 0 auto;
+  min-height: 30%;
 
   ${flexCenter}
-`;
-
-export const MenuBottomWrapper = styled.View`
-  height: 94%;
 `;

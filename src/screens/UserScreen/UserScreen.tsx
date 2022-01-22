@@ -1,20 +1,22 @@
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { SpeedDial } from 'react-native-elements';
+
 import { RootTabScreenProps } from '../../../types';
-import Button from '../../components/atoms/Button';
 import Spiner from '../../components/atoms/Spiner';
-import TextWrapper from '../../components/atoms/Text';
 import { TitleText, TitleWrapper } from '../../components/atoms/Title';
 import Card from '../../components/Card/Card';
 import Layout from '../../Layout/Layout';
+import useMenuBottom from './useMenuBottom';
 
 import * as S from './UserScreen.css';
 import useUserScreen from './UserScreen.hook';
 
-export default function UserScreen({ navigation }: RootTabScreenProps<'Home'>) {
-  const { t } = useTranslation();
+export default function UserScreen({ navigation }: RootTabScreenProps<'User'>) {
+  const [isOpenMenu, setOpenMenu] = useState<boolean>(false);
 
   const { redirect, closeLearn, todaysWord, learnType, loading, breakDay, setRedirect } =
     useUserScreen();
+  const { actions } = useMenuBottom({ navigation });
 
   if (loading) return <Spiner />;
 
@@ -41,6 +43,28 @@ export default function UserScreen({ navigation }: RootTabScreenProps<'Home'>) {
         )}
         {/* {!breakDay ? <ButtonsSection /> : <BreakDayView />} */}
       </Layout>
+      <SpeedDial
+        color='#2e2757'
+        isOpen={isOpenMenu}
+        icon={{ name: 'menu', color: '#fff' }}
+        openIcon={{ name: 'close', color: '#fff' }}
+        onOpen={() => setOpenMenu(true)}
+        onClose={() => setOpenMenu(false)}
+      >
+        {actions.map(el => (
+          <SpeedDial.Action
+            titleStyle={{ textTransform: 'uppercase' }}
+            key={el.name}
+            color='#aaa'
+            icon={el.icon}
+            title={el.name}
+            onPress={() => {
+              setOpenMenu(false);
+              el.onClick();
+            }}
+          />
+        ))}
+      </SpeedDial>
     </S.Wrapper>
   );
 }

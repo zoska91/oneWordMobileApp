@@ -142,6 +142,7 @@ export const getRandomWordAPI = async () => {
 
 export const addWordAPI = async (data: IInputsAddWord) => {
   const { userId } = getCurrentUser();
+  console.log(data, userId);
 
   try {
     const docRef = await addDoc(collection(db, 'words'), {

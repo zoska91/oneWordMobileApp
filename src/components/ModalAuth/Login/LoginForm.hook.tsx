@@ -39,7 +39,8 @@ const useLogin = () => {
         return;
       }
       // @ts-ignore
-      navigation.navigate('User');
+      // navigation.navigate('User');
+      navigation.goBack();
     } catch (e) {
       console.error(e);
     }
