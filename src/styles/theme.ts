@@ -15,5 +15,5 @@ export const theme: DefaultTheme = {
   colorSecondary: '#8c3a68',
   colorLight: '#e5e6ef',
 
-  status: ['#2e2757', '#8c3a68', '#009300'],
+  status: ['#7d90f2', '#8c3a68', '#009300'],
 };

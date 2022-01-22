@@ -48,6 +48,7 @@ const useWordsList = () => {
     editingWord,
     editWord,
     saveEditingWord,
+    t,
   };
 };
 
