@@ -113,12 +113,10 @@ export const getRandomWordAPI = async () => {
   );
 
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   // TODO ts - problem with types from firestore
   let words: any[] = [];
 
   querySnapshot.forEach(doc => {
-    console.log(doc);
     words = [...words, { ...doc.data(), wordId: doc.id }];
   });
 
@@ -142,7 +140,6 @@ export const getRandomWordAPI = async () => {
 
 export const addWordAPI = async (data: IInputsAddWord) => {
   const { userId } = getCurrentUser();
-  console.log(data, userId);
 
   try {
     const docRef = await addDoc(collection(db, 'words'), {
@@ -162,14 +159,15 @@ export const updateWordAPI = async (id: string, dataToUpdate: IInputsAddWord) =>
 
   // Set the "capital" field of the city 'DC'
   try {
-    const resp = await updateDoc(docRef, {
+    await updateDoc(docRef, {
       ...dataToUpdate,
       updatedDate: new Date(),
     });
-    console.log('dodano');
-    console.log(resp);
+
+    return 'success';
   } catch (e) {
     showToastMsg('Something went wrong', 'error');
+    return e;
   }
 };
 

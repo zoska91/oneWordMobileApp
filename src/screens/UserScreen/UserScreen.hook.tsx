@@ -9,7 +9,7 @@ import { INotification } from '../../types/api';
 import { learnTypes } from '../../constants/constants';
 
 const useUserScreen = () => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useGlobalState('loading');
   const [redirect, setRedirect] = useState<boolean>(false);
 
   const [learnType, setLearnType] = useGlobalState('learnType');

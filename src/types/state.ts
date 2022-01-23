@@ -25,4 +25,5 @@ export interface Istate {
   todaysWord: ITodaysWord;
   closeLearn: boolean;
   breakDay: boolean;
+  loading: boolean;
 }

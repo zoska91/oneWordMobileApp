@@ -6,31 +6,64 @@ import { deleteWordAPI, getAllWordsOfCurrentUser, updateWordAPI } from '../../..
 import { IInputsAddWord } from '../../../types/formTypes';
 import { ITodayWord } from '../../../types/api';
 
+const emptyWord = {
+  basicWord: '',
+  transWord: '',
+  addLang: '',
+  createdDate: '',
+  status: 0,
+  userId: '',
+};
+
 const useWordsList = () => {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState<boolean>(false);
   const [words, setWords] = useState<ITodayWord[]>([]);
-  const [editingWord, setEditingWord] = useState<null | ITodayWord>(null);
+  const [editingWord, setEditingWord] = useState<ITodayWord>(emptyWord);
 
   const statusDict = [t('statusDict.new'), t('statusDict.today'), t('statusDict.done')];
 
   const getAllWords = async () => {
-    const resp = await getAllWordsOfCurrentUser();
-    setWords(_.cloneDeep(resp));
+    setLoading(true);
+
+    try {
+      const resp = await getAllWordsOfCurrentUser();
+      setWords(_.cloneDeep(resp));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const deleteWord = async (wordId: string) => {
-    await deleteWordAPI(wordId);
-    await getAllWords();
-  };
+    setLoading(true);
 
-  const editWord = (word: ITodayWord | null) => {
-    setEditingWord(word);
-    console.log(word);
+    try {
+      await deleteWordAPI(wordId);
+      await getAllWords();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const saveEditingWord = async (wordId: string, values: IInputsAddWord) => {
-    await updateWordAPI(wordId, values);
-    await getAllWords();
+    setLoading(true);
+    try {
+      const resp = await updateWordAPI(wordId, values);
+
+      if (resp === 'success') {
+        await getAllWords();
+        setEditingWord(emptyWord);
+        return 'success';
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -46,8 +79,9 @@ const useWordsList = () => {
     deleteWord,
     statusDict,
     editingWord,
-    editWord,
+    setEditingWord,
     saveEditingWord,
+    loading,
     t,
   };
 };

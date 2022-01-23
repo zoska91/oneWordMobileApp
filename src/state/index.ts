@@ -35,6 +35,7 @@ const inisialState: Istate = {
   },
   closeLearn: false,
   breakDay: false,
+  loading: false,
 };
 
 const { useGlobalState, setGlobalState } = createGlobalState(inisialState);

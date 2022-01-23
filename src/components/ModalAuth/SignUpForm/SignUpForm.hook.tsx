@@ -23,11 +23,9 @@ const useSignUpForm = () => {
 
   const onSubmit: SubmitHandler<IAuth> = ({ email, password }) => {
     const auth = getAuth();
-    console.log(email, password);
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
-        console.log(user);
         if (user.uid) {
           loginByEmail(email, password);
           addDefaultSettingsIfNotExistsAPI(user.uid);

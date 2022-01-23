@@ -8,6 +8,7 @@ import { Text, View, Modal } from 'react-native';
 import styled from 'styled-components/native';
 import Button from '../Button';
 import { AntDesign } from '@expo/vector-icons';
+import Popup from '../../Popup/Popup';
 
 export const TouchableOpacity = styled.TouchableOpacity`
   margin-bottom: 50px;
@@ -53,47 +54,36 @@ const SelectField: FC<SelectFieldProps> = ({ name, required, desc, options, labe
 
       {errors?.[name] && <S.ErrorText>{errors?.[name]?.message}</S.ErrorText>}
 
-      <Modal
-        style={{ flex: 1, position: 'relative' }}
-        animationType='slide'
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <S.BackdropModal onPress={() => setModalVisible(false)} />
-        <S.ModalContainer>
-          <S.CloseButton onPress={() => setModalVisible(false)}>
-            <AntDesign name='closecircle' size={32} color='#2e2757' />
-          </S.CloseButton>
-          <Controller
-            control={control}
-            name={name}
-            render={({ field: { onChange, value } }) => (
-              <Picker
-                selectedValue={value}
-                onValueChange={itemValue => onChange(itemValue)}
-                style={{ marginBottom: 30 }}
-              >
-                {options.map((el, i) => (
-                  <Picker.Item key={el.value} label={el.label} value={el.value} />
-                ))}
-              </Picker>
-            )}
-            rules={{
-              required: {
-                value: true,
-                message: t('form.require'),
-              },
-            }}
-          />
+      <Popup modalVisible={modalVisible} setModalVisible={setModalVisible}>
+        <S.CloseButton onPress={() => setModalVisible(false)}>
+          <AntDesign name='closecircle' size={32} color='#2e2757' />
+        </S.CloseButton>
+        <Controller
+          control={control}
+          name={name}
+          render={({ field: { onChange, value } }) => (
+            <Picker
+              selectedValue={value}
+              onValueChange={itemValue => onChange(itemValue)}
+              style={{ marginBottom: 30 }}
+            >
+              {options.map((el, i) => (
+                <Picker.Item key={el.value} label={el.label} value={el.value} />
+              ))}
+            </Picker>
+          )}
+          rules={{
+            required: {
+              value: true,
+              message: t('form.require'),
+            },
+          }}
+        />
 
-          <Button dark small onPress={() => setModalVisible(false)}>
-            {t('buttons.submit')}
-          </Button>
-        </S.ModalContainer>
-      </Modal>
+        <Button dark small onPress={() => setModalVisible(false)}>
+          {t('buttons.submit')}
+        </Button>
+      </Popup>
     </S.FieldContainer>
   );
 };
