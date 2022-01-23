@@ -4,10 +4,14 @@ interface LabelType {
   big?: boolean;
   light?: boolean;
 }
+interface WrapperType {
+  small?: boolean;
+}
 
-export const FieldContainer = styled.View`
+export const FieldContainer = styled.View<WrapperType>`
   width: 80%;
-  margin: 10px auto;
+  margin: ${({ small }) => (small ? '10px auto 0px' : '10px auto')};
+  padding: 0;
 `;
 
 export const ErrorText = styled.Text`

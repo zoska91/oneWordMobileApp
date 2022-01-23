@@ -1,9 +1,9 @@
+import { CheckBox } from '@ui-kitten/components';
 import { FC } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { Checkbox, FormControl } from '@chakra-ui/react';
-import { Desc, FormLabel } from 'components/ModalForm/Form.css';
+import * as S from './Inputs.css';
 
 interface CheckboxFieldProps {
   name: string;
@@ -16,26 +16,33 @@ const CheckboxField: FC<CheckboxFieldProps> = ({ name, required, desc }) => {
     register,
     formState: { errors },
     getValues,
+    control,
   } = useFormContext();
 
   const { t } = useTranslation();
   const values = getValues();
 
   return (
-    <FormControl isInvalid={Boolean(errors[name])}>
-      <FormControl isInvalid={Boolean(errors.summary)}>
-        <Checkbox
-          isChecked={values[name]}
-          {...register(name, {
-            // @ts-ignore
-            required: required ? t('form.require') : null,
-          })}
-        >
-          <FormLabel>{t(`form.${name}Label`)}</FormLabel>
-        </Checkbox>
-        {desc && <Desc>{t(`form.${name}Desc`)}</Desc>}
-      </FormControl>
-    </FormControl>
+    <S.FieldContainer small>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, value } }) => (
+          <CheckBox checked={value} onChange={nextChecked => onChange(nextChecked)}>
+            <S.FormLabel style={{ fontFamily: 'JosefinSans_700Bold' }}>
+              {t(`form.${name}Label`)}
+            </S.FormLabel>
+          </CheckBox>
+        )}
+        rules={{
+          required: {
+            value: true,
+            message: t('form.require'),
+          },
+        }}
+      />
+      {desc && <S.Desc>{t(`form.${name}Desc`)}</S.Desc>}
+    </S.FieldContainer>
   );
 };
 

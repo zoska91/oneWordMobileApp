@@ -19,10 +19,18 @@ interface SelectFieldProps {
   required?: boolean;
   desc?: boolean;
   options: { value: string | number; label: string }[];
-  label?: JSX.Element | string;
+  noLabel?: boolean;
+  placeholderText?: string;
 }
 
-const SelectField: FC<SelectFieldProps> = ({ name, required, desc, options, label }) => {
+const SelectField: FC<SelectFieldProps> = ({
+  name,
+  required,
+  desc,
+  options,
+  noLabel,
+  placeholderText,
+}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const {
     formState: { errors },
@@ -35,19 +43,19 @@ const SelectField: FC<SelectFieldProps> = ({ name, required, desc, options, labe
 
   return (
     <S.FieldContainer>
-      {label ? (
-        label
-      ) : (
+      {!noLabel && (
         <S.FormLabel style={{ fontFamily: 'JosefinSans_700Bold' }}>
           {t(`form.${name}Label`)}
         </S.FormLabel>
       )}
       {desc && <S.Desc>{t(`form.${name}Desc`)}</S.Desc>}
 
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity onPress={() => setModalVisible(true)} style={{ height: 0 }}>
         <S.SelectValue>
           <Text>
-            {options?.filter(el => el.value === value)[0]?.label || t(`form.${name}Placeholder`)}
+            {options?.filter(el => el.value === value)[0]?.label ||
+              placeholderText ||
+              t(`form.${name}Placeholder`)}
           </Text>
         </S.SelectValue>
       </TouchableOpacity>

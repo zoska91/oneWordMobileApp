@@ -63,6 +63,8 @@ export const en = {
     itIsTheClue:
       'This is main point of this app. We will remind you of one word every day, at the times you choose, in the forms you choose',
 
+    notificationSelectPlaceholder: 'Select learn type...',
+
     // auth
     loginTitle: 'Log in',
     signinTitle: 'Sign in',

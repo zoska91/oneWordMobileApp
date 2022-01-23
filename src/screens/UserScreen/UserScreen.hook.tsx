@@ -10,7 +10,6 @@ import { learnTypes } from '../../constants/constants';
 
 const useUserScreen = () => {
   const [loading, setLoading] = useGlobalState('loading');
-  const [redirect, setRedirect] = useState<boolean>(false);
 
   const [learnType, setLearnType] = useGlobalState('learnType');
   const [closeLearn, setCloseLearn] = useGlobalState('closeLearn');
@@ -56,7 +55,7 @@ const useUserScreen = () => {
     setLoading(true);
 
     onAuthStateChanged(auth, user => {
-      if (!user) setRedirect(true);
+      // if (!user) setRedirect(true);
 
       getCurrentLearnType();
       getTodayWord();
@@ -65,13 +64,11 @@ const useUserScreen = () => {
   }, []);
 
   return {
-    redirect,
     closeLearn,
     todaysWord,
     learnType,
     loading,
     breakDay,
-    setRedirect,
   };
 };
 

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { View } from 'react-native';
 import AddWordForm from './AddWordForm/AddWordForm';
+import PreferencesForm from './PreferencesForm/PreferencesForm';
 import WordsList from './WordsList/WordsList';
 
 interface ModalUserProps {
@@ -12,6 +13,8 @@ const ModalUser: FC<ModalUserProps> = ({ action }) => {
     <View style={{ width: '100%', height: '100%' }}>
       {action === 'addWord' && <AddWordForm />}
       {action === 'list' && <WordsList />}
+      {action === 'list' && <WordsList />}
+      {action === 'preferences' && <PreferencesForm />}
     </View>
   );
 };

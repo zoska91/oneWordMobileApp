@@ -9,11 +9,9 @@ import useAddWordForm from './AddWordForm.hook';
 
 import * as S from './AddWordForm.style';
 
-interface AddWordFormProps {
-  onClose?: () => void;
-}
+interface AddWordFormProps {}
 
-const AddWordForm: FC<AddWordFormProps> = ({ onClose }) => {
+const AddWordForm: FC<AddWordFormProps> = () => {
   const { navigation, addLangOptions, methods, onSubmit, handleSubmit, onError, t } =
     useAddWordForm();
 

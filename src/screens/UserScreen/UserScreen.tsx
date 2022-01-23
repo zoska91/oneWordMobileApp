@@ -14,8 +14,7 @@ import useUserScreen from './UserScreen.hook';
 export default function UserScreen({ navigation }: RootTabScreenProps<'User'>) {
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false);
 
-  const { redirect, closeLearn, todaysWord, learnType, loading, breakDay, setRedirect } =
-    useUserScreen();
+  const { closeLearn, todaysWord, learnType, loading, breakDay } = useUserScreen();
   const { actions } = useMenuBottom({ navigation });
 
   if (loading) return <Spiner />;
