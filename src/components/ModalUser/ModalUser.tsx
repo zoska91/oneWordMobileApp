@@ -13,7 +13,6 @@ const ModalUser: FC<ModalUserProps> = ({ action }) => {
     <View style={{ width: '100%', height: '100%' }}>
       {action === 'addWord' && <AddWordForm />}
       {action === 'list' && <WordsList />}
-      {action === 'list' && <WordsList />}
       {action === 'preferences' && <PreferencesForm />}
     </View>
   );

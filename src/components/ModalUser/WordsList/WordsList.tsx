@@ -80,7 +80,7 @@ const WordsList: FC<WordsListProps> = () => {
         renderItem={renderSingleWord}
         keyExtractor={item => item.basicWord}
       />
-      {loading && <Spiner />}
+      {!editingWord && loading && <Spiner />}
     </S.Wrapper>
   );
 };

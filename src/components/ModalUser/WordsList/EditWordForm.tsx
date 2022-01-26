@@ -55,7 +55,7 @@ const EditWordForm: FC<EditWordFormProps> = ({ data, saveEditingWord, loading })
         <FormProvider {...methods}>
           <TitleText> {t('form.editWordTitle')}</TitleText>
 
-          <S.InputsContainer style={{ marginBottom: -30, marginTop: 0 }}>
+          <S.InputsContainer style={{ marginBottom: 0, marginTop: 0 }}>
             <InputField name='basicWord' required />
             <InputField name='transWord' required />
             <SelectField name='addLang' required options={addLangOptions} />
