@@ -20,12 +20,13 @@ export const WordCard = styled.View`
 export const BasicWord = styled.Text`
   position: relative;
   color: ${({ theme }) => theme.colorPrimary};
-  font-size: 20px;
+  font-size: 32px;
   text-align: center;
   font-weight: bold;
   margin: 0;
-  min-height: 30%;
+  min-height: 25%;
   text-shadow: 2px 2px 0px #fff;
+  padding-top: 50px;
 
   ${flexCenter}
 `;

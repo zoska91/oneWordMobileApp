@@ -1,9 +1,10 @@
+import { useNavigation } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
-import { RootTabScreenProps } from '../../../types';
 import { logOut } from '../../db/API/auth';
 
-const useMenuBottom = ({ navigation }: RootTabScreenProps<'User'>) => {
+const useMenuBottom = () => {
   const { t } = useTranslation();
+  const navigation = useNavigation();
 
   const opernModal = (action: string) => {
     navigation.navigate('Modal', {

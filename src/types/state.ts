@@ -1,4 +1,4 @@
-interface answerWord {
+export interface answerWord {
   id: string;
   text: string;
 }

@@ -37,7 +37,7 @@ export const getShuffleWordsAPI = async () => {
 
   const shuffleWords: any = [];
 
-  while (shuffleWords.length < 3) {
+  while (shuffleWords.length < 2) {
     const randomIndex = Math.floor(Math.random() * words.length);
     if (!shuffleWords.includes(words[randomIndex])) shuffleWords.push(words[randomIndex]);
   }
@@ -59,7 +59,6 @@ export const checkIsBreakDay = async () => {
 // main function to initial get word
 export const getTodayWordAPI = async () => {
   const { userId } = getCurrentUser();
-
   // get today word (if exist)
   if (userId) {
     const q = query(
@@ -109,9 +108,8 @@ export const getRandomWordAPI = async () => {
     collection(db, 'words'),
     where('addLang', '==', selectLanguage),
     where('userId', '==', userId),
-    where('status', '==', '0')
+    where('status', 'in', [0, '0'])
   );
-
   const querySnapshot = await getDocs(q);
   // TODO ts - problem with types from firestore
   let words: any[] = [];

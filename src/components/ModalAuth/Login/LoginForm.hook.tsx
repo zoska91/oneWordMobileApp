@@ -39,7 +39,9 @@ const useLogin = () => {
         return;
       }
       // @ts-ignore
-      // navigation.navigate('User');
+      if (!resp.code) {
+        addDefaultSettingsIfNotExistsAPI(resp.uid);
+      }
       navigation.goBack();
     } catch (e) {
       console.error(e);
@@ -50,8 +52,8 @@ const useLogin = () => {
     const result = await singInByGoogle();
 
     if (result.token && result.user) {
-      navigation.navigate('User');
       addDefaultSettingsIfNotExistsAPI(result.user.uid);
+      navigation.navigate('User');
     }
   };
 
