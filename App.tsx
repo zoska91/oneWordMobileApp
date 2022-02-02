@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider } from 'styled-components/native';
 import Toast from 'react-native-toast-message';
+import { LogBox } from 'react-native';
 
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
@@ -14,6 +15,8 @@ import { ApplicationProvider } from '@ui-kitten/components';
 export default function App() {
   const { isLoadingComplete, fontsLoaded } = useCachedResources();
   const colorScheme = useColorScheme();
+
+  LogBox.ignoreLogs(['Warning: ...']);
 
   if (!isLoadingComplete || !fontsLoaded) {
     return null;

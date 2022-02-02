@@ -13,7 +13,7 @@ export const en = {
   notifications: {
     iKnow: 'We mark this word as you know. Next word will be different!',
     goodToKnow: `It's another small step to success! Great!`,
-    dontGiveUp: `Next time will be better! Don't give up!`,
+    dontGiveUp: `Next time will be better! Don't give up and try again!`,
     correctAnswer: `Greate! It's good answer`,
   },
   closeLearn: `Take a break! We will let you know when it's time to learn :)`,
@@ -62,6 +62,8 @@ export const en = {
     addDailyNotification: 'Add daily notification',
     itIsTheClue:
       'This is main point of this app. We will remind you of one word every day, at the times you choose, in the forms you choose',
+
+    notificationSelectPlaceholder: 'Select learn type...',
 
     // auth
     loginTitle: 'Log in',

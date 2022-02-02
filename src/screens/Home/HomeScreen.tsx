@@ -59,7 +59,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   useEffect(() => {
     const backgroundSubscription = Notification.addNotificationResponseReceivedListener(
       response => {
-        console.log(response);
+        // console.log(response);
         if (response && response.notification.request.content.data.id === 'test') {
           // navigation.navigate('Modal');
         }

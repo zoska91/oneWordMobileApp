@@ -37,7 +37,7 @@ export const getShuffleWordsAPI = async () => {
 
   const shuffleWords: any = [];
 
-  while (shuffleWords.length < 3) {
+  while (shuffleWords.length < 2) {
     const randomIndex = Math.floor(Math.random() * words.length);
     if (!shuffleWords.includes(words[randomIndex])) shuffleWords.push(words[randomIndex]);
   }
@@ -59,7 +59,6 @@ export const checkIsBreakDay = async () => {
 // main function to initial get word
 export const getTodayWordAPI = async () => {
   const { userId } = getCurrentUser();
-
   // get today word (if exist)
   if (userId) {
     const q = query(
@@ -109,16 +108,13 @@ export const getRandomWordAPI = async () => {
     collection(db, 'words'),
     where('addLang', '==', selectLanguage),
     where('userId', '==', userId),
-    where('status', '==', '0')
+    where('status', 'in', [0, '0'])
   );
-
   const querySnapshot = await getDocs(q);
-  console.log(querySnapshot);
   // TODO ts - problem with types from firestore
   let words: any[] = [];
 
   querySnapshot.forEach(doc => {
-    console.log(doc);
     words = [...words, { ...doc.data(), wordId: doc.id }];
   });
 
@@ -161,14 +157,15 @@ export const updateWordAPI = async (id: string, dataToUpdate: IInputsAddWord) =>
 
   // Set the "capital" field of the city 'DC'
   try {
-    const resp = await updateDoc(docRef, {
+    await updateDoc(docRef, {
       ...dataToUpdate,
       updatedDate: new Date(),
     });
-    console.log('dodano');
-    console.log(resp);
+
+    return 'success';
   } catch (e) {
     showToastMsg('Something went wrong', 'error');
+    return e;
   }
 };
 

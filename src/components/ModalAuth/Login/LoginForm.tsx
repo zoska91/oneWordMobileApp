@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import InputField from '../../atoms/Inputs/InputField';
 import GoogleButton from '../../atoms/Inputs/GoogleButton';
@@ -14,13 +15,15 @@ interface LoginFormProps {
 }
 
 const LoginForm: FC<LoginFormProps> = ({ toggleDown }) => {
+  const { t } = useTranslation();
+
   const { methods, handleSubmit, onSubmit, googleSubmit, onError } = useLogin();
 
   return (
     <S.Wrapper>
       <FormProvider {...methods}>
         <S.TouchableOpacity onPress={toggleDown}>
-          <TitleText>Login</TitleText>
+          <TitleText> {t('form.loginTitle')}</TitleText>
         </S.TouchableOpacity>
 
         <GoogleButton onPress={googleSubmit} />

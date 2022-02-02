@@ -17,9 +17,9 @@ export const defaultSettingsData = {
   isBreak: true,
   isSummary: true,
   notifications: [
-    { time: '12:42', type: '1' },
-    { time: '14:42', type: '2' },
-    { time: '12:42', type: '3' },
+    { time: '12:42', type: 'SHOW_WORD' },
+    { time: '14:42', type: 'QUIZ' },
+    { time: '12:42', type: 'APPEAR' },
   ],
   selectLanguage: 'en',
   summaryDay: '1',

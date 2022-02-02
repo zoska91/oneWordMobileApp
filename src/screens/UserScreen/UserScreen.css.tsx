@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { device } from '../../styles/devices';
 import { flexCenter } from '../../styles/mixins';
 
 export const Wrapper = styled.View`
@@ -13,31 +14,28 @@ export const Wrapper = styled.View`
 export const WordCard = styled.View`
   height: 100%;
   width: 100%;
-  padding: 0 30px;
+  padding: 20px;
 `;
 
 export const BasicWord = styled.Text`
   position: relative;
   color: ${({ theme }) => theme.colorPrimary};
-  font-size: 20px;
+  font-size: 32px;
   text-align: center;
   font-weight: bold;
   margin: 0;
-  min-height: 30%;
+  min-height: 25%;
   text-shadow: 2px 2px 0px #fff;
+  padding-top: 50px;
 
   ${flexCenter}
 `;
 
 export const TransWord = styled.View`
   width: 100%;
-  min-height: 50%;
   margin: 0 auto;
   flex: 1 0 auto;
+  min-height: 30%;
 
   ${flexCenter}
-`;
-
-export const MenuBottomWrapper = styled.View`
-  height: 94%;
 `;

@@ -16,7 +16,7 @@ const Card = ({ children }: PropsWithChildren<CardProps>) => {
     <S.Bg windowHeight={windowHeight} windowWidth={windowWidth}>
       <BlurView
         intensity={40}
-        style={{ position: 'absolute', height: windowHeight * 0.5, width: windowWidth * 0.8 }}
+        style={{ position: 'absolute', height: windowHeight * 0.57, width: windowWidth * 0.8 }}
       ></BlurView>
       <View>{children}</View>
     </S.Bg>

@@ -21,10 +21,10 @@ interface styleWrapperProps {
 
 const Wrapper = styled.TouchableOpacity<styleWrapperProps>`
   background-color: ${({ theme, dark, secondaryColor }) =>
-    dark ? theme.colorPrimary : secondaryColor ? theme.colorSecondary : 'rgba(255, 255, 255, 0.5)'};
+    dark ? theme.colorPrimary : secondaryColor ? theme.colorSecondary : '#f7f9fc'};
   border: none;
   padding: ${({ small }) => (small ? '10px 30px' : '20px 50px')};
-  border-radius: 20px;
+  border-radius: 15px;
   margin: 0 20px;
 
   border: 2px solid transparent;

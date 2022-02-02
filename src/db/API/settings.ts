@@ -22,7 +22,6 @@ export const createDefaultSettingsAPI = async (userId: string) => {
       userId,
       createdDate: Timestamp.fromDate(new Date()),
     });
-    console.log('Document written with ID: ', docRef.id);
   } catch (e) {
     console.error(e);
   }

@@ -1,4 +1,4 @@
-interface answerWord {
+export interface answerWord {
   id: string;
   text: string;
 }
@@ -25,4 +25,5 @@ export interface Istate {
   todaysWord: ITodaysWord;
   closeLearn: boolean;
   breakDay: boolean;
+  loading: boolean;
 }
