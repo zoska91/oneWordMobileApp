@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { Dimensions, Animated } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Button from '../../atoms/Button';
 import GoogleButton from '../../atoms/Inputs/GoogleButton';
@@ -35,19 +36,21 @@ const SignUpForm: FC<SignFormProps> = ({ toogleUp, toggleSlide }) => {
       />
 
       <FormProvider {...methods}>
-        <S.TouchableOpacity onPress={toogleUp}>
-          <TitleText light>Sign In</TitleText>
-        </S.TouchableOpacity>
+        <KeyboardAwareScrollView>
+          <S.TouchableOpacity onPress={toogleUp}>
+            <TitleText light>Sign In</TitleText>
+          </S.TouchableOpacity>
 
-        <GoogleButton onPress={googleSubmit} />
-        <S.InputsContainer>
-          <InputField name='email' required light />
-          <InputField name='password' required light secureTextEntry />
-        </S.InputsContainer>
+          <GoogleButton onPress={googleSubmit} />
+          <S.InputsContainer>
+            <InputField name='email' required light />
+            <InputField name='password' required light secureTextEntry />
+          </S.InputsContainer>
 
-        <Button secondaryColor onPress={handleSubmit(onSubmit, onError)}>
-          Sign in
-        </Button>
+          <Button secondaryColor onPress={handleSubmit(onSubmit, onError)}>
+            Sign in
+          </Button>
+        </KeyboardAwareScrollView>
       </FormProvider>
     </Animated.View>
   );

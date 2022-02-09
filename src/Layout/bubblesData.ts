@@ -70,7 +70,7 @@ export const bubbles = [
     height: '400',
     width: '400',
     r: '200',
-    top: '73%',
+    top: '82%',
     left: '-40%',
     cx: '200',
     cy: '230',

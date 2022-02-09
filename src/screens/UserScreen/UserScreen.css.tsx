@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import { device } from '../../styles/devices';
 import { flexCenter } from '../../styles/mixins';
 
 export const Wrapper = styled.View`
@@ -12,7 +11,8 @@ export const Wrapper = styled.View`
 `;
 
 export const WordCard = styled.View`
-  height: 100%;
+  position: relative;
+  height: 120%;
   width: 100%;
   padding: 20px;
 `;
@@ -26,7 +26,7 @@ export const BasicWord = styled.Text`
   margin: 0;
   min-height: 25%;
   text-shadow: 2px 2px 0px #fff;
-  padding-top: 50px;
+  padding-top: 25px;
 
   ${flexCenter}
 `;

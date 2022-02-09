@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { Input } from '@ui-kitten/components';
 
 import Spiner from '../../../components/atoms/Spiner';
 import { ITodayWord } from '../../../types/api';
@@ -13,6 +14,7 @@ import { TitleText } from '../../atoms/Title';
 import EditWordForm from './EditWordForm';
 
 import * as S from './WordsList.css';
+import InputField from '../../atoms/Inputs/InputField';
 
 interface WordsListProps {}
 
@@ -26,6 +28,8 @@ const WordsList: FC<WordsListProps> = () => {
     saveEditingWord,
     loading,
     t,
+    searchValue,
+    setSearchValue,
   } = useWordsList();
 
   const renderSingleWord = ({ item, index }: { item: ITodayWord; index: number }) => (
@@ -47,7 +51,7 @@ const WordsList: FC<WordsListProps> = () => {
     >
       <S.SingleWord key={item.wordId}>
         <S.DataWord status={item.status}>
-          <TextWrapper>{item.basicWord}</TextWrapper>
+          <TextWrapper border>{item.basicWord}</TextWrapper>
           <TextWrapper>{item.transWord}</TextWrapper>
           <TextWrapper color={item.status}>{statusDict[item.status]}</TextWrapper>
         </S.DataWord>
@@ -73,6 +77,13 @@ const WordsList: FC<WordsListProps> = () => {
   return (
     <S.Wrapper>
       <TitleText> {t('form.wordsListTitle')}</TitleText>
+
+      <Input
+        placeholder={t(`searchWordInput`)}
+        value={searchValue}
+        onChangeText={value => setSearchValue(value)}
+        style={{ marginHorizontal: 30, marginTop: 20 }}
+      />
       <EditWordForm data={editingWord} saveEditingWord={saveEditingWord} loading={loading} />
       <FlatList
         style={{ paddingTop: 30 }}

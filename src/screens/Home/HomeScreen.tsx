@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as Notification from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
+import { useIsFocused } from '@react-navigation/native';
 
 import { RootTabScreenProps } from '../../../types';
 import { TitleWrapper, TitleText } from '../../components/atoms/Title';
@@ -12,94 +11,24 @@ import Button from '../../components/atoms/Button';
 
 import * as S from './HomePage.css';
 import { getCurrentUser } from '../../db/API/auth';
-
-// co się stanie z notufikacjami kiedy aplikacja jest otwarta
-Notification.setNotificationHandler({
-  handleNotification: async () => {
-    return {
-      shouldShowAlert: true,
-      shouldPlaySound: false,
-      shouldSetBadge: false,
-    };
-  },
-});
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
   const { t } = useTranslation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    const user = getCurrentUser();
-    if (user) navigation.navigate('User');
-  }, []);
+    const auth = getAuth();
 
-  useEffect(() => {
-    Permissions.askAsync(Permissions.NOTIFICATIONS)
-      .then(statusObj => {
-        if (statusObj.status !== 'granted') {
-          return Permissions.askAsync(Permissions.NOTIFICATIONS);
-        }
-        return statusObj;
-      })
-      .then(statusObj => {
-        if (statusObj?.status !== 'granted') {
-          alert('So sad ');
-          return;
-        }
-      });
-  }, []);
-
-  interface Inotification {
-    title: 'First notification';
-    body: string;
-    data: {
-      id: string;
-    };
-  }
-
-  useEffect(() => {
-    const backgroundSubscription = Notification.addNotificationResponseReceivedListener(
-      response => {
-        // console.log(response);
-        if (response && response.notification.request.content.data.id === 'test') {
-          // navigation.navigate('Modal');
-        }
-      }
-    );
-    // co się dzieje kiedy przychodzi notyfikacja i aplikacja jest otwarta
-    const foreGroundSubscription = Notification.addNotificationReceivedListener(notification => {
-      console.log('przychodzi');
-      // if (notification.request.content.data.id === 'test') {
-      //   navigation.navigate('Modal');
-      // }
+    onAuthStateChanged(auth, user => {
+      if (user?.uid) navigation.navigate('User');
     });
 
-    return () => {
-      //  czyście subskrypcje
-      foreGroundSubscription.remove();
-      backgroundSubscription.remove();
-    };
-  }, []);
-
-  //   trigger: {
-  //     hour: 19;
-  //     minute: 45;
-  //     repeats: true;
-  // }
-
-  const triggerNotification = () => {
-    Notification.scheduleNotificationAsync({
-      content: {
-        title: 'First notification',
-        body: 'supcio tekscik',
-        data: {
-          id: 'test',
-        },
-      },
-      trigger: {
-        seconds: 5,
-      },
-    });
-  };
+    if (isFocused) {
+      const user = getCurrentUser();
+      if (user?.userId) navigation.navigate('User');
+    }
+  }, [, isFocused]);
 
   return (
     <S.Wrapper>

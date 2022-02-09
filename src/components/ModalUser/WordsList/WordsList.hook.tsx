@@ -18,6 +18,8 @@ const emptyWord = {
 const useWordsList = () => {
   const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [basicWords, setBasicWords] = useState<ITodayWord[]>([]);
   const [words, setWords] = useState<ITodayWord[]>([]);
   const [editingWord, setEditingWord] = useState<ITodayWord>(emptyWord);
 
@@ -29,6 +31,7 @@ const useWordsList = () => {
     try {
       const resp = await getAllWordsOfCurrentUser();
       setWords(_.cloneDeep(resp));
+      setBasicWords(_.cloneDeep(resp));
     } catch (e) {
       console.log(e);
     } finally {
@@ -66,6 +69,22 @@ const useWordsList = () => {
     }
   };
 
+  const search = (value: string) => {
+    const uppercaseValue = value.toUpperCase();
+
+    const newWords = basicWords.filter(
+      el =>
+        el.basicWord.toUpperCase().includes(uppercaseValue) ||
+        el.transWord.toUpperCase().includes(uppercaseValue)
+    );
+
+    setWords(newWords);
+  };
+
+  useEffect(() => {
+    search(searchValue);
+  }, [searchValue]);
+
   useEffect(() => {
     getAllWords();
 
@@ -83,6 +102,8 @@ const useWordsList = () => {
     saveEditingWord,
     loading,
     t,
+    searchValue,
+    setSearchValue,
   };
 };
 

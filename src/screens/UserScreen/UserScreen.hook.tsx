@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import { useGlobalState } from '../../state';
 
-import { checkIsBreakDay, getAllWordsOfCurrentUser, getTodayWordAPI } from '../../db/API/words';
+import { checkIsBreakDay, getTodayWordAPI } from '../../db/API/words';
 import { getUserSettingsAPI } from '../../db/API/settings';
 import { INotification } from '../../types/api';
 import { learnTypes } from '../../constants/constants';
@@ -34,11 +34,12 @@ const useUserScreen = () => {
     const times: { time: number; type: string }[] = data.notifications
       .map((el: INotification) => {
         const [h, min] = el.time.split(':');
+
         const notificationTime = Number(h) * 60 * 60 + Number(min);
         return { time: notificationTime, type: el.type };
       })
       .reverse();
-    console.log('times', times);
+
     for (const noti of times) {
       const currentTime = Number(new Date().getHours()) * 60 * 60 + Number(new Date().getMinutes());
 
@@ -50,16 +51,11 @@ const useUserScreen = () => {
     }
   };
   useEffect(() => {
-    const auth = getAuth();
     setLoading(true);
 
-    onAuthStateChanged(auth, user => {
-      // if (!user) setRedirect(true);
-
-      getCurrentLearnType();
-      getTodayWord();
-      setLoading(false);
-    });
+    getCurrentLearnType();
+    getTodayWord();
+    setLoading(false);
   }, []);
 
   return {

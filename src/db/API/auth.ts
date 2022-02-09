@@ -49,7 +49,7 @@ export const logOut = async () => {
 
 export const getCurrentUser = () => {
   const auth = getAuth();
-  const user = auth.currentUser;
+  const user = auth?.currentUser;
   const userId = user?.uid;
 
   return { userId, user };

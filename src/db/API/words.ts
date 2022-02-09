@@ -127,7 +127,6 @@ export const getRandomWordAPI = async () => {
   const todayWord = words[randomIndex];
 
   // change status to 1 - today word
-  console.log(words, todayWord);
   await changeStatusAPI(todayWord.wordId, 1);
 
   const shuffleWords = await getShuffleWordsAPI();

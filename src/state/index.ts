@@ -18,20 +18,7 @@ const inisialState: Istate = {
       id: '',
       text: '',
     },
-    randomWords: [
-      {
-        id: '',
-        text: '',
-      },
-      {
-        id: '3',
-        text: '',
-      },
-      {
-        id: '4',
-        text: '',
-      },
-    ],
+    randomWords: [],
   },
   closeLearn: false,
   breakDay: false,

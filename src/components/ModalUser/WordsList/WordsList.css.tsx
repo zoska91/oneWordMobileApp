@@ -29,6 +29,7 @@ export const DataWord = styled.View<IStyles>`
   display: flex;
   flex-grow: 1;
   align-items: flex-start;
+  width: 70%;
   /* flex-direction: row; */
   justify-content: space-between;
   padding: 0 40px 0 10px;

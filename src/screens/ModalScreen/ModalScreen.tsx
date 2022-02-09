@@ -20,7 +20,7 @@ const ModalScreen: FC<IModalScreenProps> = ({ route }) => {
     return () => {
       // temporary - i dont know how to do this after login in LoginForm.hook.ts with closing modal
       const user = getCurrentUser();
-      if (type === 'auth' && user) navigation.navigate('User');
+      if (type === 'auth' && user.userId) navigation.navigate('User');
     };
   }, []);
 

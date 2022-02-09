@@ -16,7 +16,6 @@ const useLogin = () => {
   const { handleSubmit } = methods;
 
   const onError: SubmitErrorHandler<IAuth> = (errors, e) => {
-    console.log('==============error');
     return console.log(errors);
   };
 

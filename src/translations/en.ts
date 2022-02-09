@@ -113,4 +113,7 @@ export const en = {
   auth: {
     error: 'Something went wrong! Try again!',
   },
+  takeAMoment: 'Take a moment to learn a new word!',
+  itsTime: `It's time!`,
+  searchWordInput: 'search word',
 };
