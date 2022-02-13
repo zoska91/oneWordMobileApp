@@ -28,7 +28,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
       const user = getCurrentUser();
       if (user?.userId) navigation.navigate('User');
     }
-  }, [, isFocused]);
+  }, [isFocused]);
 
   return (
     <S.Wrapper>

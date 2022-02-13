@@ -13,6 +13,7 @@ const AppearView: FC<AppearViewProps> = () => {
 
   const [todaysWord] = useGlobalState('todaysWord');
   const [isAnswerShow, setIsAnswerShow] = useGlobalState('isAnswerShow');
+  console.log(isAnswerShow);
 
   return (
     <>

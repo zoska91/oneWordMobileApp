@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { useEffect, useRef } from 'react';
+import { AppState } from 'react-native';
 
 import { useGlobalState } from '../../state';
 
@@ -13,6 +13,13 @@ const useUserScreen = () => {
 
   const [learnType, setLearnType] = useGlobalState('learnType');
   const [closeLearn, setCloseLearn] = useGlobalState('closeLearn');
+
+  // for reset
+  const [, setIsAnswerShow] = useGlobalState('isAnswerShow');
+  const [, setCurrentAnswer] = useGlobalState('currentAnswer');
+  const [, setBlockShowAnswerButton] = useGlobalState('blockShowAnswerButton');
+  const [, setBlockSubmit] = useGlobalState('blockSubmit');
+
   const [breakDay, setBreakDay] = useGlobalState('breakDay');
   const [todaysWord, setTodaysWordData] = useGlobalState('todaysWord');
 
@@ -41,7 +48,8 @@ const useUserScreen = () => {
       .reverse();
 
     for (const noti of times) {
-      const currentTime = Number(new Date().getHours()) * 60 * 60 + Number(new Date().getMinutes());
+      const currentTime =
+        Number(new Date().getHours()) * 60 * 60 + 1 + Number(new Date().getMinutes());
 
       if (currentTime > noti.time) {
         //  @ts-ignore
@@ -50,12 +58,40 @@ const useUserScreen = () => {
       }
     }
   };
-  useEffect(() => {
-    setLoading(true);
 
+  const resetValues = () => {
+    setIsAnswerShow(false);
+    setCurrentAnswer(null);
+    setBlockShowAnswerButton(false);
+    setBlockSubmit(false);
+  };
+
+  const init = () => {
+    setLoading(true);
     getCurrentLearnType();
     getTodayWord();
     setLoading(false);
+  };
+
+  const appState = useRef(AppState.currentState);
+
+  useEffect(() => {
+    setLoading(true);
+    const subscription = AppState.addEventListener('change', nextAppState => {
+      if (appState.current.match(/inactive|background/) && nextAppState === 'active') {
+        init();
+      }
+
+      if (appState.current.match(/inactive|background/) && nextAppState === 'background') {
+        resetValues();
+      }
+
+      appState.current = nextAppState;
+    });
+  }, []);
+
+  useEffect(() => {
+    init();
   }, []);
 
   return {

@@ -24,18 +24,15 @@ export const BasicWord = styled.Text`
   text-align: center;
   font-weight: bold;
   margin: 0;
-  min-height: 25%;
   text-shadow: 2px 2px 0px #fff;
   padding-top: 25px;
+  padding-bottom: 25px;
 
   ${flexCenter}
 `;
 
-export const TransWord = styled.View`
+export const TransWord = styled.ScrollView`
   width: 100%;
   margin: 0 auto;
-  flex: 1 0 auto;
-  min-height: 30%;
-
-  ${flexCenter}
+  min-height: 55%;
 `;
