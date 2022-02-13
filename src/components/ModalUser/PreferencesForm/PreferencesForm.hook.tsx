@@ -3,8 +3,13 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form';
 import { ISettings } from '../../../types/api';
 import { IInputsPreferences } from '../../../types/formTypes';
+import useNotifications from '../../../notifications/useNotifications';
+import { useNavigation } from '@react-navigation/native';
 
 const usePreferencesForm = () => {
+  const triggerNotification = useNotifications();
+  const navigation = useNavigation();
+
   const [defaultValues, setDefaultValues] = useState<ISettings | null>(null);
 
   const methods = useForm();
@@ -30,8 +35,14 @@ const usePreferencesForm = () => {
   }, [defaultValues]);
 
   const onSubmit: SubmitHandler<IInputsPreferences> = data => {
-    console.log(data);
+    const times = data.notifications.map(el => {
+      const [hour, minute] = el.time.split(':');
+      return { hour: +hour, minute: +minute };
+    });
+    triggerNotification(times);
     if (defaultValues?.id) updateUserSettings(defaultValues.id, data);
+
+    navigation.navigate('User');
   };
 
   return {

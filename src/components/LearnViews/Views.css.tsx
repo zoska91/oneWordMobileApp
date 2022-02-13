@@ -28,6 +28,9 @@ export const SingleAnswerWrapper = styled.FlatList`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
 `;
 
 export const SingleAnswer = styled.TouchableOpacity<{ active: Boolean; isCorrect: boolean }>`

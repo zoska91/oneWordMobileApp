@@ -20,12 +20,10 @@ const useAddWordForm = () => {
   const { handleSubmit, reset } = methods;
 
   const onError: SubmitErrorHandler<IInputsAddWord> = (errors, e) => {
-    console.log('==============error');
     return console.log(errors);
   };
 
   const onSubmit: SubmitHandler<IInputsAddWord> = data => {
-    console.log(data);
     addWordAPI({ ...data });
     showToastMsg(t(`wordCreated`), 'success');
     reset();

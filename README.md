@@ -13,3 +13,5 @@ to do:
 - quiz from all words
 - reminder day - customization
 - first view to set min 3 words (without it could be problem with quiz)
+- fix - exclude todays word from shuffleWords func
+- some problems with login

@@ -22,8 +22,6 @@ const QuizView: FC<QuizViewProps> = () => {
   const [, setIsAnswerShow] = useGlobalState('isAnswerShow');
   const [isCorrect, setIsCorrect] = useState(false);
 
-  console.log(currentAnswer);
-
   const renderSingleAnswer = ({ item, index }: { item: answerWord; index: number }) => (
     <S.SingleAnswer
       key={`${item.id}-${index}`}
@@ -64,7 +62,7 @@ const QuizView: FC<QuizViewProps> = () => {
     showToastMsg(msg, 'info');
     setBlockShowAnswerButton(true);
   };
-  console.log(todaysWord);
+
   const data: answerWord[] = [
     ...todaysWord?.randomWords,
     {
@@ -72,6 +70,7 @@ const QuizView: FC<QuizViewProps> = () => {
       text: todaysWord.transWord,
     },
   ];
+
   return (
     <>
       {todaysWord?.randomWords?.length < 1 ? (
@@ -79,13 +78,13 @@ const QuizView: FC<QuizViewProps> = () => {
       ) : (
         <>
           <S.SingleAnswerWrapper
-            style={{ paddingTop: 30 }}
             data={data}
             // @ts-ignore
             renderItem={renderSingleAnswer}
             // @ts-ignore
             keyExtractor={item => item.id}
           />
+
           <Button onPress={showAnswer} secondaryColor disabled={blockShowAnswerButton}>
             {t('showAnswer')}
           </Button>

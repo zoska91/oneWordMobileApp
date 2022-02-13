@@ -1,10 +1,11 @@
 {
   "expo": {
-    "name": "oneWordMobileApp",
+    "name": "only ONE WORD a day",
     "slug": "oneWordMobileApp",
+    "description": "go!",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "assets/images/icon.png",
+    "icon": "assets/images/splash.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -15,9 +16,12 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zofia.janas.oneWordMobileApp"
     },
     "android": {
       "adaptiveIcon": {

@@ -44,7 +44,7 @@ export const getUserSettingsAPI = async () => {
   const q = query(collection(db, 'settings'), where('userId', '==', userId));
   const querySnapshot = await getDocs(q);
 
-  let data: any = [];
+  let data: any[] = [];
 
   try {
     querySnapshot.forEach(doc => {

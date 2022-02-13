@@ -6,6 +6,7 @@ export const Wrapper = styled.View`
   justify-content: center;
   width: 100%;
   padding-bottom: 150px;
+  padding-top: 50px;
 `;
 
 export const InputsContainer = styled.View`

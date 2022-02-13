@@ -11,7 +11,6 @@ interface LabelType {
 
 export const Wrapper = styled.ScrollView`
   padding-top: 40px;
-  padding-bottom: 200px;
   margin-bottom: 20px;
 `;
 
