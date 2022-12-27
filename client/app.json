@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "only ONE WORD a day",
+    "slug": "oneWordMobileApp",
+    "description": "go!",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "assets/images/splash.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/5f76fe26-ff05-4fc9-8327-cf03fb1c91b8"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.zofia.janas.oneWordMobileApp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "assets/images/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5f76fe26-ff05-4fc9-8327-cf03fb1c91b8"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
+  }
+}
